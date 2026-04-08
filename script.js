@@ -77,32 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
         heroElements.forEach(el => el.classList.add('visible'));
     }, 100);
 
-    // FAQ Accordion
-    const accordionHeaders = document.querySelectorAll('.accordion-header');
-
-    accordionHeaders.forEach(header => {
-        header.addEventListener('click', () => {
-            const currentlyActive = document.querySelector('.accordion-header[aria-expanded="true"]');
-
-            // Toggle current
-            const expand = header.getAttribute('aria-expanded') === 'false';
-            header.setAttribute('aria-expanded', expand);
-            const content = header.nextElementSibling;
-
-            if (expand) {
-                content.style.maxHeight = content.scrollHeight + "px";
-            } else {
-                content.style.maxHeight = null;
-            }
-
-            // Close others
-            if (currentlyActive && currentlyActive !== header) {
-                currentlyActive.setAttribute('aria-expanded', 'false');
-                currentlyActive.nextElementSibling.style.maxHeight = null;
-            }
-        });
-    });
-
     // Interactive Quote Calculator
     const calcForm = document.getElementById('calculator-form');
     if (calcForm) {
@@ -178,6 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const dest = document.getElementById('calc_dest').value.trim();
             const details = document.getElementById('calc_details').value.trim();
             const name = document.getElementById('calc_name').value.trim();
+            const phone = document.getElementById('calc_phone').value.trim();
 
             // Construct WhatsApp Message
             let message = `*NUEVA SOLICITUD DE COTIZACIÓN* 🚛\n\n`;
@@ -186,6 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
             message += `*Destino:* ${dest}\n`;
             message += `*Detalles de Carga:* ${details}\n\n`;
             message += `*Nombre:* ${name}\n`;
+            message += `*Teléfono:* ${phone}\n`;
             
             const wpPhone = "5491132479231";
             const wpUrl = `https://wa.me/${wpPhone}?text=${encodeURIComponent(message)}`;

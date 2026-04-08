@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ruben-dario-ttes.pages.dev/sitemap.xml

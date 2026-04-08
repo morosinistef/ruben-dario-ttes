@@ -1,3 +1,22 @@
+/* Skip link (accesibilidad: salta al contenido con teclado) */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 8px;
+    background: #111827;
+    color: #fff;
+    padding: 10px 16px;
+    z-index: 10000;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: top 0.2s;
+}
+.skip-link:focus {
+    top: 8px;
+    outline: 3px solid #fff;
+}
+
 :root {
     /* Colors */
     --primary-bg: #E8F0F5;
