@@ -1,0 +1,46 @@
+# Claude Code (skills locales, log de proyecto, settings)
+.claude/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# Editores / IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+
+# Logs y temporales
+*.log
+*.tmp
+*.bak
+*.old
+
+# Archivos de entorno (por si en el futuro agregás backend)
+.env
+.env.local
+.env.*.local
+
+# Dependencias (por si en el futuro agregás npm)
+node_modules/
+package-lock.json
+
+# Build output (por si en el futuro usás un bundler)
+dist/
+build/
+.cache/
+
+# Archivos del sistema de Windows
+ehthumbs.db
+ehthumbs_vista.db
+[Tt]humbs.db
+
+# Imágenes de prueba / borradores (opcional, descomentá si querés)
+# *_draft.*
+# *_test.*
