@@ -400,17 +400,61 @@ section {
     color: #4CAF50;
 }
 
-/* Info Strip */
+/* Info Strip Marquee */
 .info-strip {
     background-color: var(--secondary-bg);
     border-bottom: 1px solid var(--border);
-    padding: 14px 0;
+    padding: 12px 0;
+    overflow: hidden;
+    position: relative;
 }
 
-.info-strip-container {
+.info-strip::before,
+.info-strip::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 80px;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.info-strip::before {
+    left: 0;
+    background: linear-gradient(to right, var(--secondary-bg) 0%, rgba(2, 6, 23, 0) 100%);
+}
+
+.info-strip::after {
+    right: 0;
+    background: linear-gradient(to left, var(--secondary-bg) 0%, rgba(2, 6, 23, 0) 100%);
+}
+
+.info-strip-marquee {
     display: flex;
-    justify-content: space-between;
+    overflow: hidden;
+    width: 100%;
+}
+
+.info-strip-track {
+    display: flex;
     align-items: center;
+    gap: 60px;
+    width: max-content;
+    animation: scrollStrip 25s linear infinite;
+}
+
+.info-strip-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes scrollStrip {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
 }
 
 .info-strip-item {
@@ -421,6 +465,7 @@ section {
     font-weight: 500;
     color: var(--text-sec);
     letter-spacing: 0.5px;
+    white-space: nowrap;
 }
 
 .info-strip-icon {
@@ -437,32 +482,15 @@ section {
     font-weight: 600;
 }
 
-#weather-temp {
+#weather-temp, #weather-temp-2 {
     color: var(--text-main);
     font-weight: 600;
 }
 
-#live-clock {
+#live-clock, #live-clock-2 {
     color: var(--text-main);
     font-weight: 600;
     font-variant-numeric: tabular-nums;
-}
-
-@media (max-width: 768px) {
-    .info-strip-container {
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    .info-strip-item {
-        font-size: 13px;
-    }
-}
-
-@media (max-width: 480px) {
-    .info-strip-location {
-        display: none;
-    }
 }
 
 /* Aesthetic Image Bands */

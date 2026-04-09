@@ -177,14 +177,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const timeOpts = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, timeZone: 'America/Argentina/Buenos_Aires' };
         const dateOpts = { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'America/Argentina/Buenos_Aires' };
 
-        const clockEl = document.getElementById('live-clock');
-        const dateEl = document.getElementById('live-date');
+        const clockEls = [document.getElementById('live-clock'), document.getElementById('live-clock-2')];
+        const dateEls = [document.getElementById('live-date'), document.getElementById('live-date-2')];
+        const timeStr = now.toLocaleTimeString('es-AR', timeOpts);
+        const formatted = now.toLocaleDateString('es-AR', dateOpts);
+        const dateStr = formatted.charAt(0).toUpperCase() + formatted.slice(1);
 
-        if (clockEl) clockEl.textContent = now.toLocaleTimeString('es-AR', timeOpts);
-        if (dateEl) {
-            const formatted = now.toLocaleDateString('es-AR', dateOpts);
-            dateEl.textContent = formatted.charAt(0).toUpperCase() + formatted.slice(1);
-        }
+        clockEls.forEach(el => { if (el) el.textContent = timeStr; });
+        dateEls.forEach(el => { if (el) el.textContent = dateStr; });
     }
 
     updateClock();
@@ -221,13 +221,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const w = data.current_weather;
             const code = weatherCodes[w.weathercode] || { desc: 'N/D', icon: '\u2601' };
 
-            const tempEl = document.getElementById('weather-temp');
-            const descEl = document.getElementById('weather-desc');
-            const iconEl = document.getElementById('weather-icon');
+            const tempEls = [document.getElementById('weather-temp'), document.getElementById('weather-temp-2')];
+            const descEls = [document.getElementById('weather-desc'), document.getElementById('weather-desc-2')];
+            const iconEls = [document.getElementById('weather-icon'), document.getElementById('weather-icon-2')];
 
-            if (tempEl) tempEl.textContent = Math.round(w.temperature) + '\u00B0C';
-            if (descEl) descEl.textContent = code.desc;
-            if (iconEl) iconEl.textContent = code.icon;
+            tempEls.forEach(el => { if (el) el.textContent = Math.round(w.temperature) + '\u00B0C'; });
+            descEls.forEach(el => { if (el) el.textContent = code.desc; });
+            iconEls.forEach(el => { if (el) el.textContent = code.icon; });
         })
         .catch(() => {
             const descEl = document.getElementById('weather-desc');
