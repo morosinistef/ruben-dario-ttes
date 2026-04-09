@@ -100,13 +100,13 @@ h6 {
 }
 
 .section-title {
-    font-size: 48px;
+    font-size: clamp(28px, 5vw, 48px);
     margin-bottom: 16px;
     font-weight: 700;
 }
 
 .section-subtitle {
-    font-size: 20px;
+    font-size: clamp(16px, 2.5vw, 20px);
     color: var(--text-sec);
     max-width: 700px;
     margin-bottom: 48px;
@@ -125,7 +125,7 @@ h6 {
 .container {
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 0 24px 0 40px;
+    padding: 0 24px;
 }
 
 .grid-2-cols {
@@ -356,13 +356,13 @@ section {
 }
 
 .hero-title {
-    font-size: 64px;
+    font-size: clamp(32px, 7vw, 64px);
     margin-bottom: 24px;
     color: var(--white);
 }
 
 .hero-subtitle {
-    font-size: 20px;
+    font-size: clamp(16px, 2.5vw, 20px);
     margin-bottom: 40px;
     max-width: 700px;
     margin-left: auto;
@@ -542,22 +542,13 @@ section {
 }
 
 .aesthetic-text {
-    font-size: 40px;
+    font-size: clamp(24px, 4.5vw, 40px);
     color: var(--white);
     letter-spacing: 1px;
     text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
-@media (max-width: 768px) {
-    .aesthetic-band.parallax {
-        background-attachment: scroll;
-        /* Fixed backgrounds are buggy on mobile iOS */
-    }
-
-    .aesthetic-text {
-        font-size: 28px;
-    }
-}
+/* parallax fix moved to 1024px breakpoint above */
 
 /* Stats */
 .stats-section {
@@ -685,32 +676,23 @@ section {
 
 /* Responsive */
 @media (max-width: 1024px) {
-    .section-title {
-        font-size: 40px;
-    }
-
-    .hero-title {
-        font-size: 56px;
-    }
-
     .grid-4-cols {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .aesthetic-band.parallax {
+        background-attachment: scroll;
     }
 }
 
 @media (max-width: 768px) {
-    .section-title {
-        font-size: 32px;
-    }
-
-    .hero-title {
-        font-size: 40px;
-    }
-
     .grid-2-cols,
-    .grid-3-cols,
-    .grid-4-cols {
+    .grid-3-cols {
         grid-template-columns: 1fr;
+    }
+
+    .grid-4-cols {
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .nav {
@@ -731,12 +713,16 @@ section {
     .nav-list {
         flex-direction: column;
         align-items: center;
-        gap: 24px;
+        gap: 16px;
     }
 
     .nav-link {
         color: var(--text-main);
         font-size: 20px;
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        padding: 8px 16px;
     }
 
     .mobile-menu-btn {
@@ -744,6 +730,10 @@ section {
     }
 
     .header-phone {
+        display: none;
+    }
+
+    .header-actions .btn {
         display: none;
     }
 
@@ -758,6 +748,60 @@ section {
     .mobile-menu-btn,
     .logo {
         color: var(--white);
+    }
+
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 16px;
+    }
+
+    .grid-4-cols,
+    .grid-2-cols {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-features {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .stat-card {
+        padding: 24px 20px;
+    }
+
+    .service-content {
+        padding: 20px;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .calc-options {
+        grid-template-columns: 1fr;
+    }
+
+    .cta-container {
+        padding: 24px 16px;
+    }
+
+    .calculator-form {
+        padding: 20px;
+    }
+
+    .logo {
+        font-size: 24px;
+    }
+
+    .logo span {
+        font-size: 28px;
     }
 }
 
@@ -1047,7 +1091,7 @@ section {
 }
 
 .cta-title {
-    font-size: 40px;
+    font-size: clamp(24px, 4.5vw, 40px);
     margin-bottom: 16px;
     text-align: center;
     color: var(--white);
@@ -1537,7 +1581,7 @@ body {
 }
 
 .step-heading {
-    font-size: 24px;
+    font-size: clamp(20px, 3vw, 24px);
     margin-bottom: 24px;
     color: var(--white);
 }
