@@ -742,12 +742,19 @@ section {
     }
 
     .header {
-        background-color: var(--text-main);
+        background-color: var(--secondary-bg);
     }
 
     .mobile-menu-btn,
     .logo {
         color: var(--white);
+    }
+
+    .logo span {
+        background: linear-gradient(135deg, #D4A843, #F0C75E, #B8942E);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
     }
 
     .footer-grid {
