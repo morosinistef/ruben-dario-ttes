@@ -215,7 +215,21 @@ document.addEventListener('DOMContentLoaded', () => {
         99: { desc: 'Tormenta con granizo', icon: '\u26C8' }
     };
 
-    fetch('https://api.open-meteo.com/v1/forecast?latitude=-34.6401&longitude=-58.5630&current_weather=true&timezone=America/Argentina/Buenos_Aires')
+    // Get visitor location by IP, then fetch weather
+    const locationEls = document.querySelectorAll('.info-strip-location');
+
+    fetch('https://ipapi.co/json/')
+        .then(res => res.json())
+        .then(geo => {
+            const lat = geo.latitude || -34.6401;
+            const lon = geo.longitude || -58.5630;
+            const city = geo.city || 'Ramos Mejía';
+            const region = geo.region || 'Buenos Aires';
+
+            locationEls.forEach(el => { if (el) el.textContent = city + ', ' + region; });
+
+            return fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&timezone=auto`);
+        })
         .then(res => res.json())
         .then(data => {
             const w = data.current_weather;
