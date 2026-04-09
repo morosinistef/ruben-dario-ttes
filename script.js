@@ -170,4 +170,67 @@ document.addEventListener('DOMContentLoaded', () => {
             window.open(wpUrl, '_blank');
         });
     }
+
+    // Live Clock
+    function updateClock() {
+        const now = new Date();
+        const timeOpts = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, timeZone: 'America/Argentina/Buenos_Aires' };
+        const dateOpts = { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'America/Argentina/Buenos_Aires' };
+
+        const clockEl = document.getElementById('live-clock');
+        const dateEl = document.getElementById('live-date');
+
+        if (clockEl) clockEl.textContent = now.toLocaleTimeString('es-AR', timeOpts);
+        if (dateEl) {
+            const formatted = now.toLocaleDateString('es-AR', dateOpts);
+            dateEl.textContent = formatted.charAt(0).toUpperCase() + formatted.slice(1);
+        }
+    }
+
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    // Weather from Open-Meteo (free, no API key)
+    const weatherCodes = {
+        0: { desc: 'Despejado', icon: '\u2600' },
+        1: { desc: 'Mayormente despejado', icon: '\uD83C\uDF24' },
+        2: { desc: 'Parcialmente nublado', icon: '\u26C5' },
+        3: { desc: 'Nublado', icon: '\u2601' },
+        45: { desc: 'Niebla', icon: '\uD83C\uDF2B' },
+        48: { desc: 'Niebla helada', icon: '\uD83C\uDF2B' },
+        51: { desc: 'Llovizna leve', icon: '\uD83C\uDF26' },
+        53: { desc: 'Llovizna', icon: '\uD83C\uDF26' },
+        55: { desc: 'Llovizna intensa', icon: '\uD83C\uDF27' },
+        61: { desc: 'Lluvia leve', icon: '\uD83C\uDF27' },
+        63: { desc: 'Lluvia', icon: '\uD83C\uDF27' },
+        65: { desc: 'Lluvia intensa', icon: '\uD83C\uDF27' },
+        71: { desc: 'Nieve leve', icon: '\u2744' },
+        73: { desc: 'Nieve', icon: '\u2744' },
+        75: { desc: 'Nieve intensa', icon: '\u2744' },
+        80: { desc: 'Chaparrones', icon: '\uD83C\uDF26' },
+        81: { desc: 'Chaparrones', icon: '\uD83C\uDF27' },
+        82: { desc: 'Chaparrones intensos', icon: '\uD83C\uDF27' },
+        95: { desc: 'Tormenta', icon: '\u26C8' },
+        96: { desc: 'Tormenta con granizo', icon: '\u26C8' },
+        99: { desc: 'Tormenta con granizo', icon: '\u26C8' }
+    };
+
+    fetch('https://api.open-meteo.com/v1/forecast?latitude=-34.6401&longitude=-58.5630&current_weather=true&timezone=America/Argentina/Buenos_Aires')
+        .then(res => res.json())
+        .then(data => {
+            const w = data.current_weather;
+            const code = weatherCodes[w.weathercode] || { desc: 'N/D', icon: '\u2601' };
+
+            const tempEl = document.getElementById('weather-temp');
+            const descEl = document.getElementById('weather-desc');
+            const iconEl = document.getElementById('weather-icon');
+
+            if (tempEl) tempEl.textContent = Math.round(w.temperature) + '\u00B0C';
+            if (descEl) descEl.textContent = code.desc;
+            if (iconEl) iconEl.textContent = code.icon;
+        })
+        .catch(() => {
+            const descEl = document.getElementById('weather-desc');
+            if (descEl) descEl.textContent = 'Clima no disponible';
+        });
 });

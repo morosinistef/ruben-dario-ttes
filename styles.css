@@ -400,107 +400,69 @@ section {
     color: #4CAF50;
 }
 
-/* Clients Carousel */
-.clients-section {
-    background-color: var(--white);
-    padding: 50px 0;
-    border-bottom: 1px solid #EAEAEA;
-    overflow: hidden;
+/* Info Strip */
+.info-strip {
+    background-color: var(--secondary-bg);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 0;
 }
 
-.clients-title {
-    text-align: center;
-    font-size: 16px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+.info-strip-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.info-strip-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
     color: var(--text-sec);
-    margin-bottom: 32px;
+    letter-spacing: 0.5px;
+}
+
+.info-strip-icon {
+    font-size: 16px;
+}
+
+.info-strip-separator {
+    color: var(--border);
+    margin: 0 4px;
+}
+
+.info-strip-location {
+    color: var(--accent);
     font-weight: 600;
 }
 
-.clients-carousel {
-    display: flex;
-    overflow: hidden;
-    position: relative;
-    width: 100%;
-}
-
-.clients-carousel::before,
-.clients-carousel::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    width: 150px;
-    height: 100%;
-    z-index: 2;
-    /* Increased z-index */
-    pointer-events: none;
-    /* Crucial so they don't block hovering the logos */
-}
-
-.clients-carousel::before {
-    left: 0;
-    background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
-}
-
-.clients-carousel::after {
-    right: 0;
-    background: linear-gradient(to left, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
-}
-
-.carousel-track {
-    display: flex;
-    align-items: center;
-    gap: 80px;
-    width: max-content;
-    animation: scrollCarousel 30s linear infinite;
-    z-index: 1;
-    /* Explicit z-index */
-}
-
-.carousel-track:hover {
-    animation-play-state: paused;
-}
-
-@keyframes scrollCarousel {
-    0% {
-        transform: translateX(0);
-    }
-
-    100% {
-        transform: translateX(calc(-50% - 40px));
-    }
-
-    /* Half width minus half gap approx */
-}
-
-.client-logo {
-    font-family: var(--font-heading);
-    font-size: 28px;
-    /* Slightly larger */
-    font-weight: 700;
-    color: #666;
-    /* Darker grey to be more visible */
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    transition: color 0.3s;
-    user-select: none;
-    white-space: nowrap;
-    padding: 10px 0;
-    /* padding to ensure text isn't cut off */
-}
-
-.client-logo span {
-    font-weight: 400;
-    font-family: var(--font-primary);
-    text-transform: none;
-    font-size: 22px;
-    margin-left: 6px;
-}
-
-.client-logo:hover {
+#weather-temp {
     color: var(--text-main);
+    font-weight: 600;
+}
+
+#live-clock {
+    color: var(--text-main);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 768px) {
+    .info-strip-container {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .info-strip-item {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .info-strip-location {
+        display: none;
+    }
 }
 
 /* Aesthetic Image Bands */
@@ -1402,23 +1364,7 @@ body {
     color: var(--text-main);
 }
 
-/* Clients Carousel */
-.clients-section {
-    background-color: var(--secondary-bg);
-    border-bottom: 1px solid var(--border);
-}
-
-.clients-carousel::before {
-    background: linear-gradient(to right, var(--secondary-bg) 0%, rgba(2, 6, 23, 0) 100%);
-}
-
-.clients-carousel::after {
-    background: linear-gradient(to left, var(--secondary-bg) 0%, rgba(2, 6, 23, 0) 100%);
-}
-
-.client-logo {
-    color: #475569;
-}
+/* Info Strip dark overrides handled in base styles above */
 
 /* Sections & Cards */
 .stats-section {
