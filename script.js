@@ -77,6 +77,29 @@ document.addEventListener('DOMContentLoaded', () => {
         heroElements.forEach(el => el.classList.add('visible'));
     }, 100);
 
+    // Card glow effect following mouse (frontend-design: purposeful motion)
+    const cards = document.querySelectorAll('.card, .advantage-card');
+    cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            card.style.setProperty('--mouse-x', (e.clientX - rect.left) + 'px');
+            card.style.setProperty('--mouse-y', (e.clientY - rect.top) + 'px');
+        });
+    });
+
+    // Stat number counter animation (frontend-design: high-impact moments)
+    const statObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                statObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('.stat-card').forEach(card => statObserver.observe(card));
+
+
     // Interactive Quote Calculator
     const calcForm = document.getElementById('calculator-form');
     if (calcForm) {
@@ -218,33 +241,95 @@ document.addEventListener('DOMContentLoaded', () => {
     // Get visitor location by IP, then fetch weather
     const locationEls = document.querySelectorAll('.info-strip-location');
 
-    fetch('https://ipapi.co/json/')
-        .then(res => res.json())
+    function fetchWeather(lat, lon) {
+        return fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&timezone=auto`)
+            .then(res => res.json())
+            .then(data => {
+                const w = data.current_weather;
+                const code = weatherCodes[w.weathercode] || { desc: 'N/D', icon: '\u2601' };
+
+                const tempEls = [document.getElementById('weather-temp'), document.getElementById('weather-temp-2')];
+                const descEls = [document.getElementById('weather-desc'), document.getElementById('weather-desc-2')];
+                const iconEls = [document.getElementById('weather-icon'), document.getElementById('weather-icon-2')];
+
+                tempEls.forEach(el => { if (el) el.textContent = Math.round(w.temperature) + '\u00B0C'; });
+                descEls.forEach(el => { if (el) el.textContent = code.desc; });
+                iconEls.forEach(el => { if (el) el.textContent = code.icon; });
+            });
+    }
+
+    function showLocationAndWeather(lat, lon, city, region) {
+        locationEls.forEach(el => { if (el) el.textContent = city + ', ' + region; });
+        return fetchWeather(lat, lon);
+    }
+
+    function setFallbackDisplay() {
+        locationEls.forEach(el => { if (el) el.textContent = 'Buenos Aires'; });
+        const descEls = [document.getElementById('weather-desc'), document.getElementById('weather-desc-2')];
+        descEls.forEach(el => { if (el) el.textContent = 'Clima no disponible'; });
+    }
+
+    // Try IP geolocation with multiple providers as fallback
+    function geoByIP() {
+        return fetch('https://ipapi.co/json/', { signal: AbortSignal.timeout(4000) })
+            .then(res => {
+                if (!res.ok) throw new Error('ipapi failed');
+                return res.json();
+            })
+            .then(geo => {
+                if (!geo.latitude) throw new Error('No coords from ipapi');
+                return geo;
+            })
+            .catch(() => {
+                // Fallback: ipwho.is (free, HTTPS, no key needed)
+                return fetch('https://ipwho.is/', { signal: AbortSignal.timeout(4000) })
+                    .then(res => {
+                        if (!res.ok) throw new Error('ip-api failed');
+                        return res.json();
+                    })
+                    .then(geo => {
+                        if (!geo.success) throw new Error('ipwho.is failed');
+                        return {
+                            latitude: geo.latitude,
+                            longitude: geo.longitude,
+                            city: geo.city,
+                            region: geo.region
+                        };
+                    });
+            });
+    }
+
+    // Try browser geolocation as last resort
+    function geoBrowser() {
+        return new Promise((resolve, reject) => {
+            if (!navigator.geolocation) return reject(new Error('No geolocation'));
+            navigator.geolocation.getCurrentPosition(
+                pos => resolve({ latitude: pos.coords.latitude, longitude: pos.coords.longitude, city: null, region: null }),
+                () => reject(new Error('Geolocation denied')),
+                { timeout: 5000 }
+            );
+        });
+    }
+
+    geoByIP()
         .then(geo => {
             const lat = geo.latitude || -34.6401;
             const lon = geo.longitude || -58.5630;
-            const city = geo.city || 'Ramos Mejía';
+            const city = geo.city || 'Buenos Aires';
             const region = geo.region || 'Buenos Aires';
-
-            locationEls.forEach(el => { if (el) el.textContent = city + ', ' + region; });
-
-            return fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&timezone=auto`);
-        })
-        .then(res => res.json())
-        .then(data => {
-            const w = data.current_weather;
-            const code = weatherCodes[w.weathercode] || { desc: 'N/D', icon: '\u2601' };
-
-            const tempEls = [document.getElementById('weather-temp'), document.getElementById('weather-temp-2')];
-            const descEls = [document.getElementById('weather-desc'), document.getElementById('weather-desc-2')];
-            const iconEls = [document.getElementById('weather-icon'), document.getElementById('weather-icon-2')];
-
-            tempEls.forEach(el => { if (el) el.textContent = Math.round(w.temperature) + '\u00B0C'; });
-            descEls.forEach(el => { if (el) el.textContent = code.desc; });
-            iconEls.forEach(el => { if (el) el.textContent = code.icon; });
+            return showLocationAndWeather(lat, lon, city, region);
         })
         .catch(() => {
-            const descEl = document.getElementById('weather-desc');
-            if (descEl) descEl.textContent = 'Clima no disponible';
-        });
+            // All IP APIs failed, try browser geolocation
+            return geoBrowser()
+                .then(geo => {
+                    locationEls.forEach(el => { if (el) el.textContent = 'Tu ubicación'; });
+                    return fetchWeather(geo.latitude, geo.longitude);
+                })
+                .catch(() => {
+                    // Everything failed, use default (Buenos Aires)
+                    return showLocationAndWeather(-34.6401, -58.5630, 'Buenos Aires', 'Buenos Aires');
+                });
+        })
+        .catch(() => setFallbackDisplay());
 });

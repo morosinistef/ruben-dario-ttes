@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transporte de Carga y Mudanzas a Todo el País | Rubén Darío Logística</title>
+    <title>Transporte de Cargas y Mudanzas | Rubén Darío Logística</title>
     <meta name="description" content="Transporte de carga, pala hidráulica, mudanzas y fletes a todo el país. Flota propia, habilitada y asegurada. +20 años de experiencia. Cotizá al instante.">
 
     <!-- Canonical -->
@@ -16,7 +16,7 @@
     <!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ruben-dario-ttes.pages.dev/">
-    <meta property="og:title" content="Transporte de Carga y Mudanzas a Todo el País | Rubén Darío Logística">
+    <meta property="og:title" content="Transporte de Cargas y Mudanzas | Rubén Darío Logística">
     <meta property="og:description" content="+20 años moviendo cargas en toda Argentina. Flota propia, seguimiento satelital y atención personalizada. Cotizá al instante por WhatsApp.">
     <meta property="og:image" content="https://ruben-dario-ttes.pages.dev/images/hero_bg.png">
     <meta property="og:image:width" content="1200">
@@ -26,9 +26,14 @@
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Transporte de Carga y Mudanzas a Todo el País | Rubén Darío Logística">
+    <meta name="twitter:title" content="Transporte de Cargas y Mudanzas | Rubén Darío Logística">
     <meta name="twitter:description" content="+20 años moviendo cargas en toda Argentina. Flota propia, seguimiento satelital y atención personalizada.">
     <meta name="twitter:image" content="https://ruben-dario-ttes.pages.dev/images/hero_bg.png">
+
+    <!-- Preconnect external APIs -->
+    <link rel="dns-prefetch" href="https://ipapi.co">
+    <link rel="dns-prefetch" href="https://ipwho.is">
+    <link rel="preconnect" href="https://api.open-meteo.com">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,32 +46,128 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": ["LocalBusiness", "LogisticsService"],
-      "name": "Transporte Rubén Darío",
-      "image": "https://ruben-dario-ttes.pages.dev/images/hero_bg.png",
-      "url": "https://ruben-dario-ttes.pages.dev/",
-      "description": "Empresa familiar de transporte de carga, mudanzas y logística con cobertura en todo el país. Más de 20 años de trayectoria.",
-      "telephone": "+541132479231",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Almirante Brown 1051",
-        "addressLocality": "Ramos Mejía",
-        "addressRegion": "Buenos Aires",
-        "addressCountry": "AR"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": "-34.6401",
-        "longitude": "-58.5630"
-      },
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-        "opens": "00:00",
-        "closes": "23:59"
-      },
-      "areaServed": "Argentina",
-      "priceRange": "$$"
+      "@graph": [
+        {
+          "@type": ["LocalBusiness", "LogisticsService"],
+          "@id": "https://ruben-dario-ttes.pages.dev/#business",
+          "name": "Transporte Rubén Darío",
+          "alternateName": "Rubén Darío Logística",
+          "image": "https://ruben-dario-ttes.pages.dev/images/hero_bg.png",
+          "logo": "https://ruben-dario-ttes.pages.dev/images/LOGO_ig.png",
+          "url": "https://ruben-dario-ttes.pages.dev/",
+          "description": "Empresa familiar de transporte de carga, mudanzas, pala hidráulica y logística con cobertura en todo el país. Más de 20 años de trayectoria en Argentina.",
+          "telephone": "+541132479231",
+          "foundingDate": "2006",
+          "numberOfEmployees": {
+            "@type": "QuantitativeValue",
+            "minValue": 10,
+            "maxValue": 50
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Almirante Brown 1051",
+            "addressLocality": "Ramos Mejía",
+            "addressRegion": "Buenos Aires",
+            "postalCode": "1704",
+            "addressCountry": "AR"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "-34.6401",
+            "longitude": "-58.5630"
+          },
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "00:00",
+            "closes": "23:59"
+          },
+          "areaServed": [
+            { "@type": "Country", "name": "Argentina" },
+            { "@type": "City", "name": "Buenos Aires" },
+            { "@type": "City", "name": "Ramos Mejía" }
+          ],
+          "serviceArea": {
+            "@type": "GeoCircle",
+            "geoMidpoint": { "@type": "GeoCoordinates", "latitude": "-34.6401", "longitude": "-58.5630" },
+            "geoRadius": "2000 km"
+          },
+          "priceRange": "$$",
+          "currenciesAccepted": "ARS",
+          "paymentAccepted": "Efectivo, Transferencia bancaria",
+          "sameAs": [
+            "https://www.instagram.com/transporterubendario/"
+          ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Servicios de Transporte y Logística",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Camiones con Pala Hidráulica",
+                  "description": "Carga y descarga de materiales pesados, escombros y maquinaria con operadores especializados.",
+                  "provider": { "@id": "https://ruben-dario-ttes.pages.dev/#business" },
+                  "areaServed": { "@type": "Country", "name": "Argentina" },
+                  "serviceType": "Transporte con pala hidráulica"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Fletes para Mudanzas",
+                  "description": "Mudanzas residenciales y comerciales con peones, embalaje y seguro de mercadería.",
+                  "provider": { "@id": "https://ruben-dario-ttes.pages.dev/#business" },
+                  "areaServed": { "@type": "Country", "name": "Argentina" },
+                  "serviceType": "Mudanzas y fletes"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Camionetas para Repartos",
+                  "description": "Distribución rápida para comercios y empresas. Rutas programadas o envíos urgentes.",
+                  "provider": { "@id": "https://ruben-dario-ttes.pages.dev/#business" },
+                  "areaServed": { "@type": "Country", "name": "Argentina" },
+                  "serviceType": "Reparto y distribución"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Transporte de Carga Peligrosa",
+                  "description": "Transporte especializado de materiales peligrosos con habilitaciones y protocolos de seguridad.",
+                  "provider": { "@id": "https://ruben-dario-ttes.pages.dev/#business" },
+                  "areaServed": { "@type": "Country", "name": "Argentina" },
+                  "serviceType": "Transporte de mercancías peligrosas"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://ruben-dario-ttes.pages.dev/#website",
+          "url": "https://ruben-dario-ttes.pages.dev/",
+          "name": "Transporte Rubén Darío",
+          "publisher": { "@id": "https://ruben-dario-ttes.pages.dev/#business" }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Inicio",
+              "item": "https://ruben-dario-ttes.pages.dev/"
+            }
+          ]
+        }
+      ]
     }
     </script>
 </head>
@@ -97,7 +198,7 @@
             
             <div class="header-actions">
                 <span class="header-phone">(011) 15-3247-9231</span>
-                <a href="#contacto" class="btn btn-primary">Solicitar Cotización</a>
+                <a href="#contacto" class="btn btn-primary">Cotizá gratis</a>
             </div>
         </div>
     </header>
@@ -113,7 +214,7 @@
                 <p class="hero-subtitle">+20 años moviendo cargas en toda Argentina. Flota propia, seguimiento satelital y atención personalizada.</p>
                 
                 <div class="hero-ctas">
-                    <a href="#contacto" class="btn btn-primary btn-large">Solicitar Cotización</a>
+                    <a href="#contacto" class="btn btn-primary btn-large">Cotizá gratis ahora</a>
                     <a href="#servicios" class="btn btn-outline btn-large">Ver Servicios</a>
                 </div>
 
@@ -122,6 +223,12 @@
                     <div class="hero-feature"><span class="check" aria-hidden="true">✓</span> Flota habilitada y asegurada</div>
                     <div class="hero-feature"><span class="check" aria-hidden="true">✓</span> Respuesta inmediata</div>
                     <div class="hero-feature"><span class="check" aria-hidden="true">✓</span> Precios competitivos</div>
+                </div>
+
+                <!-- Trust badge - CRO: social proof near CTA -->
+                <div class="hero-trust" aria-label="Indicador de confianza">
+                    <span class="trust-dot" aria-hidden="true"></span>
+                    <span class="trust-text">Más de 500 empresas confían en nosotros</span>
                 </div>
             </div>
         </section>
@@ -195,14 +302,14 @@
         <section class="services-section" id="servicios">
             <div class="container">
                 <div class="section-header text-center fade-in">
-                    <h2 class="section-title">Nuestros servicios de transporte</h2>
-                    <p class="section-subtitle">Soluciones completas de logística para particulares y empresas</p>
+                    <h2 class="section-title">Servicios de transporte y logística en Argentina</h2>
+                    <p class="section-subtitle">Soluciones completas de transporte de cargas, mudanzas, repartos y carga peligrosa para particulares y empresas en todo el país</p>
                 </div>
 
                 <div class="grid-2-cols services-grid">
                     <div class="card service-card fade-in">
                         <div class="service-img-wrapper">
-                            <img src="images/service_pala.jpg" alt="Camiones con Pala Hidráulica" class="service-img" loading="lazy" sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, 50vw">
+                            <img src="images/service_pala.jpg" alt="Camiones con Pala Hidráulica" class="service-img" loading="lazy" width="400" height="400" sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, 50vw">
                         </div>
                         <div class="service-content">
                             <div class="service-icon" aria-hidden="true">🚛</div>
@@ -214,7 +321,7 @@
 
                     <div class="card service-card fade-in" style="transition-delay: 0.1s;">
                         <div class="service-img-wrapper">
-                            <img src="images/service_mudanza.jpg" alt="Fletes para Mudanzas" class="service-img" loading="lazy" sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, 50vw">
+                            <img src="images/service_mudanza.jpg" alt="Fletes para Mudanzas" class="service-img" loading="lazy" width="280" height="280" sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, 50vw">
                         </div>
                         <div class="service-content">
                             <div class="service-icon" aria-hidden="true">📦</div>
@@ -226,7 +333,7 @@
 
                     <div class="card service-card fade-in">
                         <div class="service-img-wrapper">
-                            <img src="images/service_reparto.jpg" alt="Camionetas para Repartos" class="service-img" loading="lazy" sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, 50vw">
+                            <img src="images/service_reparto.jpg" alt="Camionetas para Repartos" class="service-img" loading="lazy" width="300" height="300" sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, 50vw">
                         </div>
                         <div class="service-content">
                             <div class="service-icon" aria-hidden="true">🚚</div>
@@ -238,7 +345,7 @@
 
                     <div class="card service-card fade-in" style="transition-delay: 0.1s;">
                         <div class="service-img-wrapper">
-                            <img src="images/service_peligrosa.jpg" alt="Carga Peligrosa" class="service-img" loading="lazy" sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, 50vw">
+                            <img src="images/service_peligrosa.jpg" alt="Transporte de Carga Peligrosa" class="service-img" loading="lazy" width="500" height="500" sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, 50vw">
                         </div>
                         <div class="service-content">
                             <div class="service-icon" aria-hidden="true">⚠️</div>
@@ -268,7 +375,7 @@
                             <div class="ig-header">
                                 <div class="ig-profile">
                                     <div class="ig-avatar">
-                                        <img src="images/LOGO_ig.png" alt="Logo Transporte Rubén Darío">
+                                        <img src="images/LOGO_ig.png" alt="Logo Transporte Rubén Darío" width="156" height="152">
                                     </div>
                                     <div class="ig-info">
                                         <a href="https://www.instagram.com/transporterubendario/" target="_blank" rel="noopener">@transporterubendario</a>
@@ -278,10 +385,10 @@
                                 <a href="https://www.instagram.com/transporterubendario/" target="_blank" rel="noopener" class="ig-follow-btn">Seguir</a>
                             </div>
                             <div class="ig-grid">
-                                <a href="https://www.instagram.com/transporterubendario/" target="_blank" rel="noopener" class="ig-post"><img src="images/ig_post_1.png" alt="Publicación de Transporte Rubén Darío en Instagram" loading="lazy"></a>
-                                <a href="https://www.instagram.com/transporterubendario/" target="_blank" rel="noopener" class="ig-post"><img src="images/ig_post_2.png" alt="Publicación de Transporte Rubén Darío en Instagram" loading="lazy"></a>
-                                <a href="https://www.instagram.com/transporterubendario/" target="_blank" rel="noopener" class="ig-post"><img src="images/ig_post_3.png" alt="Publicación de Transporte Rubén Darío en Instagram" loading="lazy"></a>
-                                <a href="https://www.instagram.com/transporterubendario/" target="_blank" rel="noopener" class="ig-post"><img src="images/ig_post_4.png" alt="Publicación de Transporte Rubén Darío en Instagram" loading="lazy"></a>
+                                <a href="https://www.instagram.com/transporterubendario/" target="_blank" rel="noopener" class="ig-post"><img src="images/ig_post_1.png" alt="Publicación de Transporte Rubén Darío en Instagram" loading="lazy" width="309" height="417"></a>
+                                <a href="https://www.instagram.com/transporterubendario/" target="_blank" rel="noopener" class="ig-post"><img src="images/ig_post_2.png" alt="Publicación de Transporte Rubén Darío en Instagram" loading="lazy" width="312" height="415"></a>
+                                <a href="https://www.instagram.com/transporterubendario/" target="_blank" rel="noopener" class="ig-post"><img src="images/ig_post_3.png" alt="Publicación de Transporte Rubén Darío en Instagram" loading="lazy" width="310" height="413"></a>
+                                <a href="https://www.instagram.com/transporterubendario/" target="_blank" rel="noopener" class="ig-post"><img src="images/ig_post_4.png" alt="Publicación de Transporte Rubén Darío en Instagram" loading="lazy" width="311" height="416"></a>
                             </div>
                             <div class="ig-footer">
                                 <a href="https://www.instagram.com/transporterubendario/" target="_blank" rel="noopener" class="ig-footer-link">📷 Ver más en nuestro Instagram...</a>
@@ -289,10 +396,10 @@
                         </div>
                     </div>
                     <div class="about-content-col fade-in">
-                        <h2 class="section-title">Empresa familiar, compromiso profesional</h2>
+                        <h2 class="section-title">Empresa familiar de transporte en Buenos Aires</h2>
                         <div class="about-text">
-                            <p>Empresa familiar con +20 años en transporte y logística. Brindamos soluciones integrales para empresas y particulares en todo el país.</p>
-                            <p>Nos destacamos en el servicio de pala hidráulica, con flota moderna, habilitada y asegurada. Rastreo satelital y monitoreo 24/7 desde nuestra central.</p>
+                            <p>Transporte Rubén Darío es una empresa familiar con más de 20 años de experiencia en transporte de cargas y logística en Argentina. Con sede en Ramos Mejía, Buenos Aires, brindamos soluciones integrales para empresas y particulares en todo el país.</p>
+                            <p>Nos especializamos en servicio de pala hidráulica, mudanzas, repartos y transporte de carga peligrosa. Contamos con flota propia, moderna, habilitada y asegurada. Rastreo satelital y monitoreo 24/7 desde nuestra central operativa.</p>
                         </div>
                         
                         <div class="about-features">
@@ -318,8 +425,8 @@
         <section class="advantages-section">
             <div class="container">
                 <div class="section-header text-center fade-in">
-                    <h2 class="section-title">¿Por qué elegirnos?</h2>
-                    <p class="section-subtitle">Nuestras ventajas competitivas marcan la diferencia en cada viaje</p>
+                    <h2 class="section-title">¿Por qué elegir Transporte Rubén Darío?</h2>
+                    <p class="section-subtitle">Ventajas competitivas que marcan la diferencia en transporte de cargas y mudanzas</p>
                 </div>
                 <div class="grid-3-cols advantages-grid">
                     <div class="advantage-card fade-in">
@@ -360,7 +467,7 @@
         <!-- PROCESO DE TRABAJO -->
         <section class="process-section fade-in">
             <div class="container text-center">
-                <h2 class="section-title">Cómo trabajamos</h2>
+                <h2 class="section-title">¿Cómo solicitar un transporte de carga?</h2>
                 <div class="timeline-container">
                     <div class="timeline-step">
                         <div class="step-number">1</div>
@@ -396,8 +503,8 @@
         <section class="cta-section" id="contacto">
             <div class="cta-bg-overlay"></div>
             <div class="container cta-container fade-in">
-                <h2 class="cta-title">¿Listo para mover tu carga con profesionales?</h2>
-                <p class="cta-subtitle">Contactanos hoy y recibí una cotización personalizada sin compromiso. Respuesta inmediata garantizada.</p>
+                <h2 class="cta-title">Cotizá tu transporte en 60 segundos</h2>
+                <p class="cta-subtitle">Completá 3 pasos simples y recibí tu presupuesto personalizado por WhatsApp. Sin cargo, sin compromiso, respuesta inmediata.</p>
                 
                 <div class="cta-form-container">
                     <form id="calculator-form" class="calculator-form">
@@ -453,11 +560,11 @@
                         <div class="calc-step" id="step-2">
                             <h3 class="step-heading">Detalles del trayecto</h3>
                             <div class="form-row">
-                                <input type="text" id="calc_origin" placeholder="Barrio o Zona de Origen" required>
-                                <input type="text" id="calc_dest" placeholder="Barrio o Zona de Destino" required>
+                                <input type="text" id="calc_origin" placeholder="Barrio o Zona de Origen" required aria-label="Barrio o zona de origen">
+                                <input type="text" id="calc_dest" placeholder="Barrio o zona de destino" required aria-label="Barrio o zona de destino">
                             </div>
                             <div class="form-row m-top">
-                                <textarea id="calc_details" placeholder="Describe brevemente qué vas a cargar (ej: 2 palets de 500kg, muebles de 3 ambientes, etc.)" rows="3" required></textarea>
+                                <textarea id="calc_details" placeholder="Describe brevemente qué vas a cargar (ej: 2 palets de 500kg, muebles de 3 ambientes, etc.)" rows="3" required aria-label="Descripción de la carga"></textarea>
                             </div>
                             <div class="form-actions m-top">
                                 <button type="button" class="btn btn-outline prev-step">⬅ Atrás</button>
@@ -469,8 +576,8 @@
                         <div class="calc-step" id="step-3">
                             <h3 class="step-heading">Casi listo. ¿A dónde enviamos el presupuesto?</h3>
                             <div class="form-row">
-                                <input type="text" id="calc_name" placeholder="Tu Nombre o Empresa" required>
-                                <input type="tel" id="calc_phone" placeholder="Tu WhatsApp (ej: 11 1234 5678)" required>
+                                <input type="text" id="calc_name" placeholder="Tu Nombre o Empresa" required aria-label="Nombre o empresa" autocomplete="name">
+                                <input type="tel" id="calc_phone" placeholder="Tu WhatsApp (ej: 11 1234 5678)" required aria-label="Número de WhatsApp" autocomplete="tel">
                             </div>
                             <div class="form-actions m-top" style="gap: 16px;">
                                 <button type="button" class="btn btn-outline prev-step">⬅ Atrás</button>
@@ -478,7 +585,7 @@
                                     <span class="icon">💬</span> Obtener Cotización
                                 </button>
                             </div>
-                            <p class="secure-text">Serás redirigido a WhatsApp con tu solicitud pre-armada.</p>
+                            <p class="secure-text">Serás redirigido a WhatsApp con tu solicitud pre-armada. Sin cargo ni compromiso.</p>
                         </div>
                     </form>
                     
@@ -494,6 +601,7 @@
             </div>
         </section>
     </main>
+
 
     <!-- FOOTER -->
     <footer class="footer">
@@ -530,7 +638,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>Copyright &copy; 2026 Transporte Rubén Darío. Todos los derechos reservados.</p>
+                <p>Copyright &copy; 2026 Transporte Rubén Darío. Todos los derechos reservados. <span class="footer-updated">Actualizado: Abril 2026</span></p>
             </div>
         </div>
     </footer>

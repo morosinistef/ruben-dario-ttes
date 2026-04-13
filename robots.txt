@@ -1,4 +1,27 @@
 User-agent: *
 Allow: /
 
+# AI Search Bots - Allowed for citation/visibility
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Block training-only crawlers
+User-agent: CCBot
+Disallow: /
+
 Sitemap: https://ruben-dario-ttes.pages.dev/sitemap.xml
